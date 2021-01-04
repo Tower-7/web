@@ -1,0 +1,76 @@
+@charset "UTF-8";
+body {
+  background: #efefef;
+}
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(1, 1, 1, 0.1);
+}
+.navbar a {
+  color: #fff;
+}
+.navbar a:hover {
+  color: royalblue;
+}
+.nav-item {
+  flex: 1;
+}
+.product > .card,
+.certificate > .card {
+  border: none;
+  border-radius: 10px !important;
+}
+
+@media (min-width: 576px) {
+  .product > .card,
+  .certificate > .card {
+    margin: 50px;
+  }
+}
+.factory {
+  width: 90%;
+  margin: 0 auto;
+}
+.factory .data {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 40px;
+  color: #fff;
+  background-image: url("../img/factory2.jpg");
+  background-size: cover;
+}
+.factory .data > div {
+  flex: 50%;
+}
+.footerPic .carousel-inner {
+  position: relative;
+}
+.footerPic .txt {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  line-height: 1.5;
+  font-size: 40px;
+  color: #fff;
+  background-color: rgba(1, 1, 2, 0.7);
+}
+.footerPic .txt .intro {
+  margin: 40px;
+  font-size: 20px;
+}
+
+.footer {
+  width: 100%;
+  height: 20vh;
+  color: #fff;
+  background-color: #000;
+}
