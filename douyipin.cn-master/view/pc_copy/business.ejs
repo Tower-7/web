@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+    <% include template/head.ejs %>
+    <link rel="stylesheet" href="/pc/css/business.css" /> 
+ </head> 
+ <body>
+   <% include template/header.ejs %>
+  <div class="house commonHtml"> 
+   <div class="bannerBox"> 
+    <div class="bd"> 
+     <ul> 
+      <li style="background-image: url(/pc/img/business-01.jpg);"></li> 
+     </ul> 
+    </div> 
+   </div> 
+   <div class="content"> 
+    <div class="case"> 
+     <div class="container"> 
+      <h1>职位推荐</h1> 
+      <div class="sliderBox active"> 
+       <div class="bd recommend"> 
+          <ul> 
+              <% if(products.length){
+                products.forEach(function(product){ %>
+                  <li> 
+                    <a href="javascript:;"> 
+                      <div class="frontBox"> 
+                        <img class="cover" data-src='<%= product.cover %>' src="" alt="" /> 
+                        <h1><%= product.title %></h1> 
+                        <p><%= product.intro %></p> 
+                      </div> 
+                      <div class="backBox"> 
+                        <h1><%= product.workType %></h1>
+                        <h3>薪资说明</h3> 
+                        <p><%- product.pay%> </p> 
+                        <h3>福利说明</h3> 
+                        <p><%- product.benefit%> </p> 
+                        <h3>用工说明</h3> 
+                        <p><%- product.task%> </p> 
+                        <h3>要求说明</h3> 
+                        <p><%- product.require%> </p>
+                        <p class="scan">微信扫描二维码进行在线应聘</p> 
+                        <img class="code"  data-src='<%= product.code %>' src="" alt="" /> 
+                      </div> 
+                    </a> 
+                  </li>
+                  <% })
+                } %>
+           </ul>
+       </div> 
+       <a href="javascript:;" class="left"></a> 
+       <a href="javascript:;" class="right"></a> 
+      </div> 
+     </div> 
+    </div> 
+    <!-- <div class="case"> 
+        <div class="container"> 
+         <h1>全部企业</h1> 
+         <div class="sliderBox active"> 
+          <div class="bd all"> 
+           <ul> 
+              <% if(products.length){
+                products.forEach(function(product){ %>
+                  <li> 
+                    <a href="javascript:;"> 
+                      <div class="frontBox"> 
+                        <img class="cover" data-src='<%= product.cover %>' src="" alt="" /> 
+                        <h1><%= product.title %></h1> 
+                        <p><%= product.intro %></p> 
+                      </div> 
+                      <div class="backBox"> 
+                        <h1><%= product.workType %></h1>
+                        <h3>薪资说明</h3> 
+                        <p><%- product.pay%> </p> 
+                        <h3>福利说明</h3> 
+                        <p><%- product.benefit%> </p> 
+                        <h3>用工说明</h3> 
+                        <p><%- product.task%> </p> 
+                        <h3>要求说明</h3> 
+                        <p><%- product.require%> </p>
+                        <p class="scan">微信扫描二维码进行在线应聘</p> 
+                        <img class="code"  data-src='<%= product.code %>' src="" alt="" /> 
+                      </div> 
+                    </a> 
+                  </li>
+                  <% })
+                } %>
+           </ul> 
+          </div> 
+          <a href="javascript:;" class="left"></a> 
+          <a href="javascript:;" class="right"></a> 
+         </div> 
+        </div> 
+       </div> 
+   </div>  -->
+  </div> 
+  <% include template/footer.ejs %> 
+  <% include template/sidebar.ejs %>
+  <% include template/script.ejs %>
+  <script src="/pc/js/business.js"></script>
+  <script type="text/javascript">
+    $(".sliderBox").slide({
+        mainCell: ".bd ul",
+        prevCell: ".left",
+        nextCell: ".right",
+        titCell: ".hd a",
+        effect: "leftLoop",
+        autoPlay: false,
+        easing: "easeOutCirc",
+        interTime: 5000,
+        vis: 4
+    });
+    $('.case p').find('a').each(function (index, ele) {
+        $(ele).click(function () {
+            $(this).parents('p').find('.active').removeClass('active');
+            $(this).addClass('active');
+            $('.case .sliderBox.active').removeClass('active');
+            $('.case').find('.sliderBox').eq(index).addClass('active');
+        })
+    })
+    slide4('.sliderBox');
+</script> 
+
+ </body>
+</html>

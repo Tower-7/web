@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include template/head.ejs %>
+	<link rel="stylesheet" href="/pc/css/index.css" />
+</head>
+
+<body class="home">
+    <% include template/header.ejs %>
+
+    <div class="index contentBox">
+
+        <% if(banners.length){ %> 
+        <div id="masterslider" class="slideBox">
+			<div class="hd">
+                
+				<ul>
+                    <% banners.forEach(function(banner){ %>
+					<li class="on"></li>
+                    <% })%>
+				</ul>
+			</div>
+			<div class="bd">
+				<ul>
+                    <% banners.forEach(function(banner){ %>
+                        <li class="0000" style="background: <%= banner.pic %> no-repeat center;">
+                            <a href="<%= banner.link %>" target="_blank" id="yhbanner"></a>
+                        </li>
+                    <% }) %>
+				</ul>
+			</div>
+			<a class="prev" href="javascript:void(0)"></a>
+			<a class="next" href="javascript:void(0)"></a>
+        </div>
+        <% } %>
+        <div class="introBox">
+            <div class="container">
+                <div class="leftBox">
+                    <div class="news-tabbtn">
+                        <ul>
+                            <li class="curr">公司理念<em></em></li>
+                        </ul>
+                    </div>
+                    <div class="news-tabmain">
+                        <div class="tabmain fadeInRight">
+                            <a href="javascript::">
+                                <h3>让天下没有难找的工作</h3>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="rightBox">
+                    <h1>业务布局</h1>
+                    <p><span>3</span>个省，超过<span>20个</span>合作企业</p><p style="margin-top:75px;">数据截至2018年12月</p>
+                </div>
+            </div>
+        </div>
+        <div class="subSliderBox">
+            <div class="container">
+                <p>OUR PRODUCT&SERVICE</p>
+                <h2>我们为您提供的服务</h2>
+                <div class="subSlider">
+                    <div class="bd">
+                        <ul>
+                            <li>
+                                <a href="javascript:;" style="background: url(/home/slider1.jpg) no-repeat center;">
+                                    <h1>生态劳务平台</h1>
+                                    <p>公司具有完善的经验运作经验，年劳务输出两千多次，是徐州最大的劳务输出服务公司</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" style="background: url(/home/slider2.jpg) no-repeat center;">
+                                    <h1>生态劳务高峰论坛</h1>
+                                    <p>创新成熟的劳务运营模式，为广大劳务从业者建设健康、高效、良性循环的生态劳务圈奠定坚实基础。</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" style="background: url(/home/slider3.jpg) no-repeat center;">
+                                    <h1>机器人招聘系统</h1>
+                                    <p>每天800通电话以上，全年无休，状态全天5颗星，自主智能学习，不断积累越来越好</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" style="background: url(/home/slider4.jpg) no-repeat center;">
+                                    <h1>人力资源管理培训</h1>
+                                    <p>改善全国劳务市场的用工环境，平衡全国劳动力就业压力,解决企业用工需求不平衡</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dotBox">
+                        <ul>
+                            <li><span></span>
+                                <span></span>
+                                <span></span></li>
+                            <li><span></span>
+                                <span></span>
+                                <span></span></li>
+                        </ul>
+                    </div>
+                    <a href="javascript:;" class="prev"></a>
+                    <a href="javascript:;" class="next"></a>
+                </div>
+            </div>
+        </div>
+        <div class="activityBox">
+            <div class="container">
+                <div class="listBox">
+                    <h1>新闻中心</h1>
+                    <div id="container">
+                        <% if(newes.length){
+                            newes.forEach(function(news){ %>
+                            <div class="newsBox">           
+                                <a href="/news/<%= news._id%>">               
+                                    <div class="textBox">                   
+                                        <h3>2019.3.05</h3>                   
+                                        <h1><%= news.title%></h1>                  
+                                        <p style="padding-bottom: 20px;">三星在周三发布了2015财年第三财季的财报，运营利润同比大增了79.8%至63亿美元，受到财报的刺...</p>                   
+                                        <span class="eye">
+                                            <i class="homeIcon homeIcon-eye"></i>11986
+                                        </span>               
+                                    </div>           
+                                </a>       
+                            </div>
+                            <% })
+                        } %>
+                    </div>
+                </div>
+                <div class="recBox">
+                    <a href="/business" style="background-image: url(/home/business.jpg)"></a>
+                    <div class="bottomBox">
+                        <a href="javascript::" class="left"></a>
+                        <a href="javascript::" class="right"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% include template/footer.ejs %>
+    <% include template/sidebar.ejs %>
+    <% include template/script.ejs %>
+    <script src="/pc/js/blocksit.js"></script>
+    <script type="text/javascript">
+        jQuery("#masterslider").slide({ mainCell: ".bd ul", effect: "left", autoPlay: true, interTime: 8000 });
+        $(window).load(function () {
+            $(".news-tabbtn li").on("mouseover", function () {
+                var li_i = $(this).index();
+                $(this).addClass("curr").siblings().removeClass("curr");
+                $(".news-tabmain").find(".tabmain").eq(li_i).stop().show().siblings().stop().hide();
+            });
+            $(".subSlider").slide({
+                mainCell: ".bd ul",
+                titCell: '.dotBox li',
+                prevCell: ".prev",
+                nextCell: ".next",
+                effect: "left",
+                autoPlay: false,
+                vis: 3,
+                easing: "easeOutCirc",
+                pnLoop: true,
+                scroll: 3
+            });
+            var getCol = function () {
+                $('#container').BlocksIt({
+                    numOfCol: 2,
+                    offsetX: 10,
+                    offsetY: 8
+                });
+            }
+            getCol();
+            $('.icon').click(function (event) {
+                $('html, body, .content').animate({
+                    scrollTop: $('#masterslider').height() - 40
+                }, 500);
+                return false;
+            });
+            var upVil = 0;
+            /*$('#yhbanner').append('<img class="gifimg" src="image/home/f.gif">');
+            setTimeout(function () {
+                $(".gifimg").css('display', 'block');
+            }, 3000)*/
+        });
+
+    </script>
+</body>
+</html>

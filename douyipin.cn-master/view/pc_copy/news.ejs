@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <% include template/head.ejs %>
+    <link rel="stylesheet" href="/pc/css/news.css" />
+</head>
+<body>
+    <% include template/header.ejs %>  
+    <div class="newsCenter commonHtml">
+        <div class="bannerBox" style="background-image: url(/pc/img/news-03.jpg)"></div>
+        <div class="content">
+            <div class="container">
+                <div class="leftBox">
+                    <ul class="bottomList">
+                        <% if(newes.length){
+                            newes.forEach(function(news){ %>
+                            <li>
+                                <a href="/news/<%= news._id %>">
+                                    <div class="textBox hasThumbnail">
+                                        <h1>2019抖易聘&#8212;&#8212;徐州站</h1>
+                                        <p>2019年3月5日，江苏仁铼--抖易聘与各大工厂签约输送人才现场进行中...</p>
+                                        <div class="infoBox">
+                                            <div class="fl">
+                                                <span class="eye">4039</span>
+                                            </div>
+                                            <div class="fr"><span class="time">2019.02.27</span></div>
+                                            <div class="thumbnailBox">
+                                                <img src="<%= news.pic %>" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <% })
+                        } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% include template/footer.ejs %>
+    <% include template/sidebar.ejs %>
+    <% include template/script.ejs %>
+    <script src="/pc/js/blocksit.js"></script>
+    <script type="text/javascript">
+        var ul_obj = $('.bottomList');
+        var more_btn = $('.moreIcon');
+        $(function () {
+            var pageIndex = 1, pageSize = parseInt('5');
+            //loadMore(pageIndex, pageSize);
+            more_btn.on('click', function () {
+                loadMore(++pageIndex, pageSize);
+            });
+        });
+        function loadMore(pageIndex, pageSize) {
+            $.ajax({
+                type: 'post',
+                async: false,
+                url: 'WebUserControl/news/GetMarketMore.ashx',
+                data: { pageIndex: pageIndex, pageSize: pageSize, typeId: '0' },
+                success: function (data) {
+                    var json = eval("(" + data + ")");
+                    if (json.List != '') {
+                        ul_obj.append(json.List);
+                        more_btn.css({ "display": "block" });
+                        if (pageIndex > 1) {
+                            $('html,body').animate({ scrollTop: ul_obj.find('.page' + pageIndex).prev().offset().top }, 1000);
+                        }
+                        if (ul_obj.find('.textBox').length >= parseInt(json.Count))
+                            more_btn.css({ "display": "none" });
+                    } else
+                        more_btn.css({ "display": "none" });
+                }
+            });
+        }
+    </script>
+
+    
+</body>
+</html>
